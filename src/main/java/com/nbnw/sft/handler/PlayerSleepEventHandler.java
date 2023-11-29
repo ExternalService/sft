@@ -92,7 +92,7 @@ public class PlayerSleepEventHandler {
 //            System.out.println("Sleeping players count:" + sleepPlayerCount);
 //            System.out.println("Players in current world count:" + playerCountUtil.currentWorldPlayerCount());
 
-            if (sleepPercentage >= SLEEP_PERCENTAGE_THRESHOLD) { // TODO 可以测试一下SLEEP_PERCENTAGE_THRESHOLD为0的情况是否会有奇怪的问题
+            if (sleepPercentage >= SLEEP_PERCENTAGE_THRESHOLD) {
                 // 睡眠玩家百分比超过阈值，为所有尚未记录开始睡眠时间的玩家记录当前时间
                 for (Map.Entry<EntityPlayer, Long> entry : worldSleepingPlayers.entrySet()) { // 遍历记录的这个世界中正在睡觉的玩家
                     if (entry.getValue() == null) {
