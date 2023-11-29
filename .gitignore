@@ -1,0 +1,30 @@
+## gradle
+/.gradle
+/build
+
+## ForgeGradle
+/run
+
+## eclipse
+/.metadata
+/eclipse/crash-reports
+/eclipse/logs
+/eclipse/mods
+/eclipse/resourcepacks
+/eclipse/saves
+/eclipse/whitelist.json
+/eclipse/banned-ips.json
+/eclipse/banned-players.json
+/eclipse/eula.txt
+/eclipse/ops.json
+/eclipse/options.txt
+/eclipse/server.properties
+/eclipse/usercache.json
+/eclipse/usernamecache.json
+/eclipse/whitelist.json
+
+## intellij
+/.idea
+/*.ipr
+/*.iws
+/*.iml

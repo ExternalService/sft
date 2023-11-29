@@ -1,0 +1,16 @@
+[
+{
+  "modid": "sft",
+  "name": "Sleep For Tomorrow",
+  "description": "Port the feature from a higher version that allows skipping the night without requiring all players to sleep, to a lower version.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["bili:6943442","ChatGPT"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
