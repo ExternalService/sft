@@ -1,37 +1,86 @@
--------------------------------------------
-Source installation information for modders
--------------------------------------------
-This code follows the Minecraft Forge installation methodology. It will apply
-some small patches to the vanilla MCP source code, giving you and it access 
-to some of the data and functions you need to build a successful mod.
+Sleep For Tomorrow模组
+Version : beta-1.0.0
+功能说明：移植高版本(>1.16)的设置睡眠玩家达到百分比即可跳过黑夜功能到低版本
+功能列表:
+	1.在当前世界有>=50%的玩家处于睡觉时，保持>=50%的状态5秒左右，能够跳过黑夜。
+	2.在玩家睡觉时，所有玩家界面会显示当前世界的正在睡觉的玩家人数和总人数
+	3.玩家可以通过快捷键关闭和开启模组的这一功能
+	4.在玩家登陆时也会根据玩家选择的本地语言，说明模组的功能，但目前只支持中文和英文。
+配置相关：
+	在模组第一次被加载后，.minecraft\config\sft下会生成本模组的配置文件
+	玩家可以通过配置文件修改是否显示登陆提示信息。
+	客户端和服务端同时存在配置信息时，只有服务端的配置会生效。
+	配置中的language=english是提前预留给以后更新模组时可能会用到的语言配置的，目前即使手动修改也不会有效果，请不要修改，否则可能引起后向兼容问题
+	language以外的配置的值只能是true和false，改成其它的值模组出了毛病我不负责。如果出了毛病你又改不回去，就删除配置文件后重启游戏。
 
-Note also that the patches are built against "unrenamed" MCP source code (aka
-srgnames) - this means that you will not be able to read them directly against
-normal code.
+BUG反馈/功能建议：3121572062@qq.com，Q群731427003 b站 uid: 6943442
 
-Source pack installation information:
 
-Standalone source installation
-==============================
+后续可能优化的地方：
+	针对玩家：
+		可能会调整为玩家可以通过配置文件或者指令调整比例大小
+	针对想要查看代码的模组开发者
+		在进一步优化屎山代码后，会开源
+		睡眠玩家统计目前逻辑较为复杂，可能可以换一种更简单的方式
 
-To install this source code for development purposes, extract this zip file.
-It ships with a demonstration mod. Run 'gradlew setupDevWorkspace' to create
-a gradle environment primed with FML. Run 'gradlew eclipse' or 'gradlew idea' to
-create an IDE workspace of your choice.
-Refer to ForgeGradle for more information about the gradle environment
-Note: On macs or linux you run the './gradlew.sh' instead of 'gradlew'
 
-Forge source installation
-=========================
-MinecraftForge ships with this code and installs it as part of the forge
-installation process, no further action is required on your part.
+模组已知问题列表
+Version : beta-1.0.0
+1.不睡觉的玩家屏幕前也会显示睡眠玩家人数统计
+	原因：
+		自定义消息显示类本身预期的表现就是向所有玩家展示信息，比如功能的开启和关闭就应该通知全体玩家。
+		但是为了偷懒，为了解决已解决问题6 共用了信息显示类
+	解决思路:
+		暂时不想解决，反正影响不大，还能提示不睡觉的玩家告诉它们有多少人是想让他们睡觉的
 
-For reference this is version @MAJOR@.@MINOR@.@REV@.@BUILD@ of FML
-for Minecraft version @MCVERSION@.
+2.当前世界睡眠玩家统计的信息显示总会是英文，功能开启又只会是中文的
+	原因：
+		目前没有做多语言适配，硬编码在代码中的
+	解决思路:
+		暂不考虑，像登录消息一样靠客户端和服务端通信来适配太麻烦了，等找到更简单的方法再说
 
-LexManos' Install Video
-=======================
-https://www.youtube.com/watch?v=8VEdtQLuLO0&feature=youtu.be
+3.无法复现的一个问题
+	在某种情况下关闭后又开启，即使玩家比例超过50%，也需要玩家起床再重新躺下才能有效
+	只遇到过一次，不清楚发生原因，可能是因为没有修改代码后没有clean就build导致的缓存问题
+	也可能是因为服务器执行缓慢导致游戏睡眠计时不符合现实时间
 
-For more details update more often refer to the Forge Forums:
-http://www.minecraftforge.net/forum/index.php/topic,14048.0.html
+已解决问题列表：
+1.从单人睡觉即可跳过黑夜改为百分比判断。改为50%
+
+2.在添加了其它模组的而出现多世界的情况下，模组的表现不是预期的行为
+	已添加多世界支持
+
+3.多世界环境下一个世界会影响到其它世界
+	已独立记录每个世界的睡眠玩家和睡眠时间
+
+4.在睡眠计时过程中关闭模组的功能无法实时生效，只有到下一个黑夜才生效
+	已通过在关闭时睡眠时长计算结果设置为-1达成效果，但导致了已解决问题5
+
+5:在睡觉过程中，在达成睡觉人数百分比的情况下，如果关闭了功能，然后过一段时间开启功能，如果此时百分比条件达成，则会在开启的一瞬间跳过夜晚。这和理想情况下要玩家躺下去需要一段时间才跳过黑夜的模组游戏表现不一致，虽然影响不大，但可能造成玩家困惑。
+	原因：为了达到在睡觉过程中有人关闭了功能，在这时选择的解决方式是简单的将计算出的每个世界独立的最长玩家睡眠时间设置为-1
+	但是实际上存储的时长是一直在增长的，所以会在开启的一瞬间就跳过黑夜。
+	解决思路：
+		不再将睡眠时长计算结果设置为-1，而是在关闭功能时，将玩家睡眠时间Long类型设置为null。
+		可行度分析：会导致再次开启功能时，在关闭功能之前的玩家的睡眠时间不会正确增加，而是一直为null
+	后续：需要在开启功能后重新为睡眠时长为null的玩家分配开启功能的时间点的世界时间为统计睡眠时长的逻辑上的入睡时间点
+
+6:在已解决的问题5的情景下，再次开启功能时，玩家的睡眠时间为null
+	原因：
+		见问题5
+	解决思路：
+		在再次开启功能时，如果玩家的睡眠计时为null，则设置为当前世界时间
+		解决思路可行度分析：应该没问题，但是还没有实现与测试
+
+7:在有玩家睡觉时，开启和关闭少数人睡觉即可跳过夜晚的功能的提示信息不可见，玩家按下按键之后没有反馈，就不知道是否成功的切换了功能和当前功能究竟是开启和关闭的
+	原因：
+		屏幕中央显示信息的类是单例，一次只能显示一个信息，模组在有玩家睡觉时会调用该单例向所有玩家显示信息
+	解决思路1：
+		利用服务端和客户端的消息机制，决定向哪些玩家显示信息。
+		可行度分析：不可行，因为单例中存储了应该显示什么消息，而有玩家在睡觉时，消息时时刻刻都会被更改为玩家睡觉人数信息
+	解决思路2:增加消息显示单例类能显示的消息个数，并在不同位置显示它们
+
+8.在玩家切换功能时，顶部会错误的显示最后记录的睡觉玩家统计信息
+	原因：
+		消息显示类是单例，目前的逻辑下睡眠玩家信息统计只会在玩家尝试睡觉时更新
+	解决思路
+		在服务端处理客户端按键开启和关闭功能前，调用新增的方法重置统计信息为空字符串
