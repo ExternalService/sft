@@ -16,11 +16,12 @@ public class PlayerBedStateHandler {
         PlayerCountUtil playerCountUtil = new PlayerCountUtil(world);
         int playersInBedCount = playerCountUtil.currentWorldSleepPlayerCount();
         int playersInWorldCount = playerCountUtil.currentWorldPlayerCount();
+        String worldPercentage = String.format("%.2f%%", (double) playersInBedCount / (double) playersInWorldCount * 100);
         if (player.isPlayerSleeping()) {
             String percentage = String.format("%.2f%%", ModConfig.getInstance().getSpsThreshold() * 100);
             ScreenMessageHandler.getInstance().showMessage("",
                     "Current World Sleeping data: " +
-                            playersInBedCount + " / " + playersInWorldCount + ". Server threshold percentage : " + percentage,
+                            playersInBedCount + " / " + playersInWorldCount + ". Client percentage: " + worldPercentage + " Server threshold: " + percentage,
                     1,
                     0xE367E9);
         }

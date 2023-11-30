@@ -54,7 +54,6 @@ public class CommandSFT extends CommandBase {
             subCommands.add("showMessageOnPlayerLogin");
             return subCommands;
         } else if (args.length == 2 && args[0].equalsIgnoreCase("playersSleepingPercentage")) {
-            // 当玩家输入 '/sft playersSleepingPercentage ' 后按 Tab 时的自动补全选项
             // 添加常用的百分比值
             List<String> percentages = new ArrayList<String>();
             percentages.add("10");
