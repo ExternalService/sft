@@ -20,7 +20,7 @@ import com.nbnw.sft.config.ModConfig;
  */
 public class PlayerSleepEventHandler {
 
-    private static final double SLEEP_PERCENTAGE_THRESHOLD = 0.5; // 50% 触发阈值 睡眠玩家百分比超过此值时才执行功能
+    // private static final double SLEEP_PERCENTAGE_THRESHOLD = 0.5; // 50% 触发阈值 睡眠玩家百分比超过此值时才执行功能
     private Map<World, Map<EntityPlayer, Long>> sleepingPlayers = new HashMap<>(); // 存储每个世界的每一个正在睡觉的玩家和该玩家的睡觉时间点
 
     /**
@@ -81,8 +81,6 @@ public class PlayerSleepEventHandler {
                 Long sleepTime = entry.getValue();
 //                System.out.println("Player: " + sleepingPlayer.getDisplayName() + ", Sleep Time: " + sleepTime);
 //                System.out.println("Player trying to sleep: " + player.getDisplayName() + ", Hash: " + player.hashCode());
-
-
             }
 
             int sleepPlayerCount =  worldSleepingPlayers.size();
@@ -91,8 +89,8 @@ public class PlayerSleepEventHandler {
 //            System.out.println("Sleeping percentage:" + sleepPercentage);
 //            System.out.println("Sleeping players count:" + sleepPlayerCount);
 //            System.out.println("Players in current world count:" + playerCountUtil.currentWorldPlayerCount());
-
-            if (sleepPercentage >= SLEEP_PERCENTAGE_THRESHOLD) {
+//            System.out.println("sps threshold: " + ModConfig.getInstance().getSpsThreshold());
+            if (sleepPercentage >= ModConfig.getInstance().getSpsThreshold()) {
                 // 睡眠玩家百分比超过阈值，为所有尚未记录开始睡眠时间的玩家记录当前时间
                 for (Map.Entry<EntityPlayer, Long> entry : worldSleepingPlayers.entrySet()) { // 遍历记录的这个世界中正在睡觉的玩家
                     if (entry.getValue() == null) {
@@ -182,7 +180,7 @@ public class PlayerSleepEventHandler {
                             entry.setValue(world.getWorldTime());
                             sleepStartTime = world.getWorldTime();  // 更新局部变量，以便后续逻辑可以使用
                         }
-                        if(sleepPercentage >= SLEEP_PERCENTAGE_THRESHOLD && sleepStartTime != null) { // 保险起见检测sleepStartTime是否为空
+                        if(sleepPercentage >= ModConfig.getInstance().getSpsThreshold() && sleepStartTime != null) { // 保险起见检测sleepStartTime是否为空
                             timeSlept = world.getWorldTime() - sleepStartTime;
                         }
                     }

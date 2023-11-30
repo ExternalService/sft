@@ -42,6 +42,9 @@ public class ModConfig {
                 "language", "english", "Language setting").getString();
         boolean enableSeveralPlayerSleep = this.config.get(Configuration.CATEGORY_GENERAL,
                 "several_player_sleep", true, "Enable whether several players sleep warp night or not").getBoolean(true);
+        // several player sleep feature threshold. default 0.5
+        double spsThreshold = (long) this.config.get(Configuration.CATEGORY_GENERAL,
+                "sps_threshold", 0.5, "several players sleep warp night sleeping player percentage(0.0-1.0), default 0.5").getDouble(0.5);
         boolean enablePlayerLoginMessage = this.config.get(Configuration.CATEGORY_GENERAL,
                 "player_login_message", true, "Enable whether show mod message to players when they login or not").getBoolean(true);
         // if the configs has changed by players, save the changes
@@ -64,6 +67,11 @@ public class ModConfig {
     public boolean isSinglePlayerSleepEnabled() {
         return this.config.get(Configuration.CATEGORY_GENERAL, "several_player_sleep", true).getBoolean();
     }
+
+    public double getSpsThreshold() {
+        return this.config.get(Configuration.CATEGORY_GENERAL, "sps_threshold", 0.5).getDouble(0.5);
+    }
+
     public boolean isPlayerLoginMessageEnabled() {
         return this.config.get(Configuration.CATEGORY_GENERAL, "player_login_message", true).getBoolean();
     }
