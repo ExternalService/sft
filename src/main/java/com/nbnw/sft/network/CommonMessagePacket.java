@@ -41,7 +41,7 @@ public class CommonMessagePacket implements IMessage {
         }
     }
     public CommonMessagePacket(MessageType type, int code) {
-        this(); // 调用无参构造
+        this();
         this.type = type;
         switch (type){
             case SERVER_LANG_REQUEST_CODE:

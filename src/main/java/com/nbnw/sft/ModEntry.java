@@ -37,8 +37,7 @@ public class ModEntry
 
     @EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
-        // 在这里注册你的命令
-        event.registerServerCommand(new CommandSFT());
+        event.registerServerCommand(new CommandSFT()); // 注册玩家指令
     }
 
     @EventHandler
@@ -71,6 +70,5 @@ public class ModEntry
         MinecraftForge.EVENT_BUS.register(new PlayerLoginEventHandler()); // 玩家登陆事件
         MinecraftForge.EVENT_BUS.register(new PlayerSleepEventHandler()); // 玩家睡觉事件
         FMLCommonHandler.instance().bus().register(new PlayerBedStateHandler()); // 显示睡觉玩家比例
-        //MinecraftForge.EVENT_BUS.register(new PlayerCommandRegister()); // 玩家指令
     }
 }
