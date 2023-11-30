@@ -22,6 +22,11 @@ public class CommandSFT extends CommandBase {
         return "/sft <subcommand> [options]";
     }
 
+//    @Override
+//    public int getRequiredPermissionLevel() {
+//        return 2; // 指令权限等级 普通玩家权限为0. OP玩家可以是1到4级，具体取决于他们被赋予的权限。
+//    }
+
     @Override
     public void processCommand(ICommandSender sender, String[] args) {
         if (args.length == 0) {
