@@ -46,7 +46,7 @@ public class ModConfig {
         double spsThreshold = (long) this.config.get(Configuration.CATEGORY_GENERAL,
                 "sps_threshold", 0.5, "several players sleep warp night sleeping player percentage(0.0-1.0), default 0.5").getDouble(0.5);
         boolean enablePlayerLoginMessage = this.config.get(Configuration.CATEGORY_GENERAL,
-                "player_login_message", true, "Enable whether show mod message to players when they login or not").getBoolean(true);
+                "login_message", true, "Enable whether show mod message to players when they login or not").getBoolean(true);
         // if the configs has changed by players, save the changes
         if (this.config.hasChanged()) {
             this.config.save();
@@ -73,7 +73,7 @@ public class ModConfig {
     }
 
     public boolean isPlayerLoginMessageEnabled() {
-        return this.config.get(Configuration.CATEGORY_GENERAL, "player_login_message", true).getBoolean();
+        return this.config.get(Configuration.CATEGORY_GENERAL, "login_message", true).getBoolean();
     }
     @SubscribeEvent
     public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {

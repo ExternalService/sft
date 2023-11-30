@@ -5,6 +5,7 @@ import com.nbnw.sft.handler.PlayerBedStateHandler;
 import com.nbnw.sft.handler.PlayerLoginEventHandler;
 import com.nbnw.sft.handler.PlayerSleepEventHandler;
 import com.nbnw.sft.handler.ScreenMessageHandler;
+import com.nbnw.sft.handler.command.CommandSFT;
 import com.nbnw.sft.network.*;
 import com.nbnw.sft.proxy.ClientProxy;
 import com.nbnw.sft.proxy.CommonProxy;
@@ -15,6 +16,7 @@ import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
@@ -32,6 +34,12 @@ public class ModEntry
     public static CommonProxy proxy;
 
     public static SimpleNetworkWrapper network;
+
+    @EventHandler
+    public void serverStarting(FMLServerStartingEvent event) {
+        // 在这里注册你的命令
+        event.registerServerCommand(new CommandSFT());
+    }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -63,5 +71,6 @@ public class ModEntry
         MinecraftForge.EVENT_BUS.register(new PlayerLoginEventHandler()); // 玩家登陆事件
         MinecraftForge.EVENT_BUS.register(new PlayerSleepEventHandler()); // 玩家睡觉事件
         FMLCommonHandler.instance().bus().register(new PlayerBedStateHandler()); // 显示睡觉玩家比例
+        //MinecraftForge.EVENT_BUS.register(new PlayerCommandRegister()); // 玩家指令
     }
 }
