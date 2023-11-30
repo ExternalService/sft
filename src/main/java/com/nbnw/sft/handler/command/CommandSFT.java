@@ -32,7 +32,6 @@ public class CommandSFT extends CommandBase {
         if (args.length == 0) {
             throw new WrongUsageException(getCommandUsage(sender));
         }
-
         switch (args[0].toLowerCase()) {
             case "playerssleepingpercentage":
                 handlePlayersSleepingPercentage(sender, args);
