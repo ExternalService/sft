@@ -76,6 +76,7 @@ public class CommandSFT extends CommandBase {
         sender.addChatMessage(new ChatComponentText("1./sft playersSleepingPercentage <percentage> to set playersSleepingPercentage." +
                 "such as you use the /gamerule playersSleepingPercentage <percentage> command in original Minecraft(1.16+)"));
         sender.addChatMessage(new ChatComponentText("2./sft login_message set to true or false to disable the sft mod's login message"));
+        sender.addChatMessage(new ChatComponentText("3.press keyboard p to enable/disable mod feature"));
     }
 
 

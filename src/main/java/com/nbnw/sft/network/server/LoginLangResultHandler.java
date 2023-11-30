@@ -20,7 +20,7 @@ public class LoginLangResultHandler {
                     "  minecraft\\config\\sft folder(Client) or config\\sft folder(Server)",
                     "2:Press p(Default) to enable or disable the feature.",
                     "  Enable not all players sleep in bed but also can warp the night.",
-                    "3:You can disable this login message by change the config file,too"//,
+                    "3:You can disable this login message by change the config file,too"
             );
             List<String> messages_zh = Arrays.asList(
                     "来自sleep for tomorrow模组的信息:",
@@ -28,7 +28,7 @@ public class LoginLangResultHandler {
                     "  minecraft\\config\\sft(客户端) or config\\sft(服务端)",
                     "2:默认按P开启/关闭本模组的功能.",
                     "  启动不用所有玩家睡觉就可以跳过夜晚功能.",
-                    "3:你也可以在配置文件中关闭本模组的登录信息显示"//,
+                    "3:你也可以在配置文件中关闭本模组的登录信息显示"
             );
 
             // 获取发送者的玩家实体

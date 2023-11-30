@@ -71,25 +71,16 @@ public class PlayerSleepEventHandler {
         if (!world.isRemote && !world.isDaytime()) { // 可能黑夜判断多余，因为白天玩家躺不到床上，就没办法触发该事件，但是也许有mod有白天睡觉功能
             Map<EntityPlayer, Long> worldSleepingPlayers = sleepingPlayers.computeIfAbsent(world, k -> new HashMap<>()); // 取出当前世界睡眠玩家和睡眠时长数据
             // 将进入睡眠状态的玩家添加到列表中，但暂时不记录开始睡眠的时间
-            // worldSleepingPlayers.putIfAbsent(player, null);
             worldSleepingPlayers.putIfAbsent(player, null);
-
-//            System.out.println("Added player to sleep list, current sleep count: " + worldSleepingPlayers.size());
 
             for (Map.Entry<EntityPlayer, Long> entry : worldSleepingPlayers.entrySet()) {
                 EntityPlayer sleepingPlayer = entry.getKey();
                 Long sleepTime = entry.getValue();
-//                System.out.println("Player: " + sleepingPlayer.getDisplayName() + ", Sleep Time: " + sleepTime);
-//                System.out.println("Player trying to sleep: " + player.getDisplayName() + ", Hash: " + player.hashCode());
             }
 
             int sleepPlayerCount =  worldSleepingPlayers.size();
             PlayerCountUtil playerCountUtil = new PlayerCountUtil(world);
             double sleepPercentage = playerCountUtil.getSleepPercentage(sleepPlayerCount, world.playerEntities.size()); // 计算睡眠玩家的百分比
-//            System.out.println("Sleeping percentage:" + sleepPercentage);
-//            System.out.println("Sleeping players count:" + sleepPlayerCount);
-//            System.out.println("Players in current world count:" + playerCountUtil.currentWorldPlayerCount());
-//            System.out.println("sps threshold: " + ModConfig.getInstance().getSpsThreshold());
             if (sleepPercentage >= ModConfig.getInstance().getSpsThreshold()) {
                 // 睡眠玩家百分比超过阈值，为所有尚未记录开始睡眠时间的玩家记录当前时间
                 for (Map.Entry<EntityPlayer, Long> entry : worldSleepingPlayers.entrySet()) { // 遍历记录的这个世界中正在睡觉的玩家
@@ -189,7 +180,6 @@ public class PlayerSleepEventHandler {
                         worldSleepingPlayers.put(player, world.getWorldTime() - 100); // 更新该玩家的睡眠开始时间
                         // 虽然worldSleepingPlayers是局部变量，但是在Map中它是引用的方式而不是赋值，所以直接修改worldSleepingPlayers也可以影响到类属性sleepingPlayers本身
                         worldMaxSleepTime = timeSlept;
-                        // System.out.println("On World Tick 赋值 worldMaxSleepTime:" + worldMaxSleepTime);
                     }
 
                     // 如果满足跳过夜晚的条件（例如，超过100）
