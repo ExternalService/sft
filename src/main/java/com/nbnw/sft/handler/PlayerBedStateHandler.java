@@ -21,7 +21,7 @@ public class PlayerBedStateHandler {
         String worldPercentage = String.format("%.2f%%", (double) playersInBedCount / (double) playersInWorldCount * 100);
         if (player.isPlayerSleeping()) {
             String percentage = String.format("%.2f%%", ModConfig.getInstance().getSpsThreshold() * 100);
-            ScreenMessageHandler.getInstance().showMessage(I18n.format(LangManager.sleepCountMessage) + " " +
+            ScreenMessageHandler.getInstance().showMessage("",I18n.format(LangManager.sleepCountMessage) + " " +
                             playersInBedCount + " / " + playersInWorldCount +
                             I18n.format(LangManager.currentSleepPercentage) + worldPercentage +
                             I18n.format(LangManager.serverThresholdPercentage) + percentage,
