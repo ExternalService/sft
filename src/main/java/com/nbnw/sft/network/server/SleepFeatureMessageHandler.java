@@ -22,8 +22,7 @@ public class SleepFeatureMessageHandler {
                 boolean newSetting = !ModConfig.getInstance().isSinglePlayerSleepEnabled();
                 ModConfig.getInstance().getConfig().get(Configuration.CATEGORY_GENERAL, "several_player_sleep", true).set(newSetting);
                 ModConfig.getInstance().reloadConfig();
-                String finalMessage = LangManager.getFinalMessage(newSetting);
-                IMessage screenMessagePacket = new CommonMessagePacket(MessageType.SERVER_SCREEN_MESSAGE, finalMessage, 5, newSetting);
+                IMessage screenMessagePacket = new CommonMessagePacket(MessageType.SERVER_SCREEN_MESSAGE, "", 5, newSetting);
                 // 发送给所有在线的客户端
                 ModEntry.network.sendToAll(screenMessagePacket);
             }
