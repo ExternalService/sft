@@ -53,7 +53,6 @@ public class ModConfig {
     }
 
     // TODO 将配置数据同步到所有客户端
-    @SideOnly(Side.SERVER)
     private void syncConfigToClients() {
         // 封装配置数据并发送到所有客户端
         // 使用Forge网络包系统进行通信
