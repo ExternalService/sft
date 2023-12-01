@@ -47,7 +47,7 @@ public class CommandSFT extends CommandBase {
         }
     }
     @Override
-    public List addTabCompletionOptions(ICommandSender sender, String[] args) {
+    public List<String> addTabCompletionOptions(ICommandSender sender, String[] args) {
         if (args.length == 1) {
             // 当玩家输入 '/sft ' 后按 Tab 时的自动补全选项
             List<String> subCommands = new ArrayList<String>();
