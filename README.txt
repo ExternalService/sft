@@ -1,5 +1,8 @@
 Sleep For Tomorrow模组
 Version : beta-1.1.1
+    1.检测到配置文件版本号不一致则会重置配置文件
+
+Version : beta-1.1.1
     1.本地化语言配置
 
 Version : beta-1.1.0
