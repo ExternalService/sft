@@ -9,7 +9,7 @@ import com.nbnw.sft.network.CommonMessagePacket;
 import com.nbnw.sft.network.CommonMessagePacket.MessageType;
 
 public class SleepFeatureToggleHandler {
-    private final int  rgbColor = 0xE367E9;
+    private static final int  rgbColor = 0xE367E9;
     public void showServerResultMessage(CommonMessagePacket message, MessageContext ctx) {
         if (ctx.side.isClient()) {
             if (!message.getType().equals(MessageType.SERVER_SCREEN_MESSAGE)) {
