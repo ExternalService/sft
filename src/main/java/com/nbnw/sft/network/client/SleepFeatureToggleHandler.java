@@ -19,7 +19,7 @@ public class SleepFeatureToggleHandler {
             boolean newSetting = message.getSleepToggle();
             ModConfig.getInstance().getConfig().get(Configuration.CATEGORY_GENERAL, "several_player_sleep", true).set(newSetting);
             ModConfig.getInstance().reloadConfig();
-            ScreenMessageHandler.getInstance().showMessage(message.getScreenMessage(), "", message.getDuration(), rgbColor);
+            ScreenMessageHandler.getInstance().showMessage(message.getScreenMessage(), message.getDuration(), rgbColor);
         }
     }
 }
