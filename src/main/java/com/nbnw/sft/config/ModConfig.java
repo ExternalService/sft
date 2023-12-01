@@ -3,6 +3,8 @@ package com.nbnw.sft.config;
 import com.nbnw.sft.network.ConfigSyncPacket;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import java.io.File;
@@ -38,7 +40,7 @@ public class ModConfig {
         File configFile = new File(modConfigDir, "sft_config.cfg");
         // create mod config file
         this.config = new Configuration(configFile);
-        loadConfiguration();
+        loadAndSyncConfig();
     }
 
     // 加载和同步配置
@@ -51,6 +53,7 @@ public class ModConfig {
     }
 
     // TODO 将配置数据同步到所有客户端
+    @SideOnly(Side.SERVER)
     private void syncConfigToClients() {
         // 封装配置数据并发送到所有客户端
         // 使用Forge网络包系统进行通信
