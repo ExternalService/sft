@@ -9,6 +9,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 /**
  * 屏幕展示提示信息单例
  * 这个方法显示的信息会对所有玩家可见
+ * TODO 对这个类需要根本上的修改，现在大多数bug都由这个类引起
  */
 public class ScreenMessageHandler {
     private static ScreenMessageHandler instance = null;
