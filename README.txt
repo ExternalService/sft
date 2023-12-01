@@ -1,4 +1,7 @@
 Sleep For Tomorrow模组
+Version : beta-1.1.2
+    1.取消服务器要求的睡眠百分比的显示
+
 Version : beta-1.1.1
     1.检测到配置文件版本号不一致则会重置配置文件
 
