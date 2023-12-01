@@ -1,8 +1,9 @@
 package com.nbnw.sft.network.server;
 
-import com.nbnw.sft.handler.ScreenMessageHandler;
+import com.nbnw.sft.common.LangManager;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.config.Configuration;
 
 import com.nbnw.sft.ModEntry;
@@ -22,8 +23,9 @@ public class SleepFeatureMessageHandler {
                 boolean newSetting = !ModConfig.getInstance().isSinglePlayerSleepEnabled();
                 ModConfig.getInstance().getConfig().get(Configuration.CATEGORY_GENERAL, "several_player_sleep", true).set(newSetting);
                 ModConfig.getInstance().reloadConfig();
-                String finalMessage = newSetting ? "为了明天而睡觉 功能已开启." : "为了明天而睡觉 功能已关闭.";
-                ScreenMessageHandler.getInstance().resetSleepMessage(); // 在开启和关闭功能时候，重置以前的睡眠玩家统计信息避免显示错误的信息
+                //I18n.format方法将根据玩家客户端的当前语言设置自动选择正确的本地化字符串。
+                //String finalMessage = I18n.format(LangManager.toggleCommonMessage) + (newSetting ? I18n.format(LangManager.toggleEnabledMessage) : I18n.format(LangManager.toggleDisabledMessage));
+                String finalMessage = LangManager.getFinalMessage(newSetting);
                 IMessage screenMessagePacket = new CommonMessagePacket(MessageType.SERVER_SCREEN_MESSAGE, finalMessage, 5, newSetting);
                 // 发送给所有在线的客户端
                 ModEntry.network.sendToAll(screenMessagePacket);
