@@ -173,7 +173,7 @@ public class PlayerSleepEventHandler {
                         }
                     }
 
-                    if(timeSlept > worldMaxSleepTime){
+                    if(worldMaxSleepTime != null && timeSlept > worldMaxSleepTime){
                         worldSleepingPlayers.put(player, world.getWorldTime() - 100); // 更新该玩家的睡眠开始时间
                         // 虽然worldSleepingPlayers是局部变量，但是在Map中它是引用的方式而不是赋值，所以直接修改worldSleepingPlayers也可以影响到类属性sleepingPlayers本身
                         worldMaxSleepTime = timeSlept;
