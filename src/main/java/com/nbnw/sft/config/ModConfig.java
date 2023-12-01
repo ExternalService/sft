@@ -9,6 +9,7 @@ import java.io.File;
 import com.nbnw.sft.ModEntry;
 
 public class ModConfig {
+    private static final String LANGUAGE = "language";
     private static final String  SEVERAL_PLAYER_SLEEP = "several_player_sleep";
     private static final String CONFIG_VERSION = "config_version";
 
@@ -41,7 +42,7 @@ public class ModConfig {
     private void loadConfiguration() {
         // read config file.if not exist,then create it with the default settings
         String language = this.config.get(Configuration.CATEGORY_GENERAL,
-                "language", "english", "Language setting").getString();
+                LANGUAGE, "english", "Language setting").getString();
         // 用于配置文件版本控制  TODO：如果检测到配置文件版本不一致 重新生成配置文件 或者删除以前的配置文件中无效的项并新增以前的配置文件没有的项.为了实现这个功能，需要一个类来记录当前版本的配置项列表
         String configVersion = this.config.get(Configuration.CATEGORY_GENERAL,
                 CONFIG_VERSION, ModEntry.metadata.version, "Mod config file version").getString();
@@ -67,7 +68,7 @@ public class ModConfig {
         this.config.load(); // reload the config file
     }
     public String getLanguage() {
-        return this.config.get(Configuration.CATEGORY_GENERAL, "language", "english").getString();
+        return this.config.get(Configuration.CATEGORY_GENERAL, LANGUAGE, "english").getString();
     }
     public String getConfigVersion(){
         return this.config.get(Configuration.CATEGORY_GENERAL, CONFIG_VERSION, "").getString();
@@ -82,13 +83,49 @@ public class ModConfig {
         return this.config.get(Configuration.CATEGORY_GENERAL, LOGIN_MESSAGE, true).getBoolean();
     }
 
-    // 检查配置文件存储的版本号信息是否和模组一致
+    /**
+     * 检查配置文件存储的版本号信息是否和模组一致
+     * @return true: 一致, false: 不一致
+     */
     public boolean versionCheck() {
-        if(getConfigVersion().equals(ModEntry.VERSION)){
+        if(getConfigVersion().equals(ModEntry.metadata.version)){ // 版本号一致
             return true;
         }
-        return false;
+        return false; // 不一致
     }
+    /**
+     * 如果不一致则重置配置文件
+     */
+    public void checkAndResetConfigIfNeeded() {
+        this.config.load(); // 首先加载配置文件
+        // 检查配置文件的版本
+        String configVersion = this.config.get(Configuration.CATEGORY_GENERAL, CONFIG_VERSION, ModEntry.metadata.version).getString();
+        // 如果配置文件的版本与模组版本不一致，则重置配置
+        if (!versionCheck()) {
+            resetConfiguration();
+        } else {
+            // 如果版本匹配，则正常加载配置
+            loadConfiguration();
+        }
+    }
+
+    /**
+     * 重置配置文件
+     */
+    private void resetConfiguration() {
+        // Reset all the configuration values to their defaults
+        this.config.get(Configuration.CATEGORY_GENERAL, SEVERAL_PLAYER_SLEEP, true).set(true);
+        this.config.get(Configuration.CATEGORY_GENERAL, SPS_THRESHOLD, 0.5).set(0.5);
+        this.config.get(Configuration.CATEGORY_GENERAL, LOGIN_MESSAGE, true).set(true);
+        this.config.get(Configuration.CATEGORY_GENERAL, LANGUAGE, "english").set("english");
+        this.config.get(Configuration.CATEGORY_GENERAL, CONFIG_VERSION, ModEntry.metadata.version).set(ModEntry.metadata.version);
+
+        // Save the reset configuration
+        if (this.config.hasChanged()) {
+            this.config.save();
+        }
+    }
+
     @SubscribeEvent
     public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.modID.equals(ModEntry.MODID)) {

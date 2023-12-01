@@ -65,6 +65,7 @@ public class ModEntry
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+        ModConfig.getInstance().checkAndResetConfigIfNeeded(); // 检查配置文件版本号并根据需要重置配置文件
         MinecraftForge.EVENT_BUS.register(ScreenMessageHandler.getInstance()); // 注册屏幕显示信息事件实例
         FMLCommonHandler.instance().bus().register(new PlayerLoginEventHandler()); // 玩家登陆事件
         MinecraftForge.EVENT_BUS.register(new PlayerLoginEventHandler()); // 玩家登陆事件
