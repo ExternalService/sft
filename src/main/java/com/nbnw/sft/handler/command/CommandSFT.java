@@ -50,20 +50,20 @@ public class CommandSFT extends CommandBase {
     public List<String> addTabCompletionOptions(ICommandSender sender, String[] args) {
         if (args.length == 1) {
             // 当玩家输入 '/sft ' 后按 Tab 时的自动补全选项
-            List<String> subCommands = new ArrayList<String>();
+            List<String> subCommands = new ArrayList<>();
             subCommands.add("help");
             subCommands.add("playersSleepingPercentage");
             subCommands.add("showMessageOnPlayerLogin");
             return subCommands;
         } else if (args.length == 2 && args[0].equalsIgnoreCase("playersSleepingPercentage")) {
             // 添加常用的百分比值
-            List<String> percentages = new ArrayList<String>();
+            List<String> percentages = new ArrayList<>();
             percentages.add("10");
             percentages.add("50");
             percentages.add("100");
             return percentages;
         }else if(args.length == 2 && args[0].equalsIgnoreCase("showMessageOnPlayerLogin")){
-            List<String> values = new ArrayList<String>();
+            List<String> values = new ArrayList<>();
             values.add("true");
             values.add("false");
             return values;
@@ -106,7 +106,7 @@ public class CommandSFT extends CommandBase {
             throw new WrongUsageException("Usage: /sft showMessageOnPlayerLogin <true/0/false/1>");
         }
         String flag = args[1];
-        boolean newSetting = true;
+        boolean newSetting;
         if(flag.equals("true") || flag.equals("0")){
             newSetting = true;
             flag = "true";
