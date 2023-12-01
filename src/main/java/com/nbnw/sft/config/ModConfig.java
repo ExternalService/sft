@@ -40,13 +40,16 @@ public class ModConfig {
         // read config file.if not exist,then create it with the default settings
         String language = this.config.get(Configuration.CATEGORY_GENERAL,
                 "language", "english", "Language setting").getString();
+        // 用于配置文件版本控制  TODO：如果检测到配置文件版本不一致 重新生成配置文件 或者删除以前的配置文件中无效的项并新增以前的配置文件没有的项.为了实现这个功能，需要一个类来记录当前版本的配置项列表
+        String configVersion = this.config.get(Configuration.CATEGORY_GENERAL,
+                "config_version", ModEntry.metadata.version, "Mod config file version").getString();
         boolean enableSeveralPlayerSleep = this.config.get(Configuration.CATEGORY_GENERAL,
                 "several_player_sleep", true, "Enable whether several players sleep warp night or not").getBoolean(true);
         // several player sleep feature threshold. default 0.5
         double spsThreshold = (long) this.config.get(Configuration.CATEGORY_GENERAL,
-                "sps_threshold", 0.5, "several players sleep warp night sleeping player percentage(0.0-1.0), default 0.5").getDouble(0.5);
+                "sps_threshold", 0.5, "Several players sleep warp night sleeping player percentage(0.0-1.0), default 0.5").getDouble(0.5);
         boolean enablePlayerLoginMessage = this.config.get(Configuration.CATEGORY_GENERAL,
-                "login_message", true, "Enable whether show mod message to players when they login or not").getBoolean(true);
+                "login_message", true, "Enable whether show mod message to players when they login or not(Use server side config)").getBoolean(true);
         // if the configs has changed by players, save the changes
         if (this.config.hasChanged()) {
             this.config.save();
