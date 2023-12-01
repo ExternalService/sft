@@ -1,9 +1,6 @@
 package com.nbnw.sft.handler;
 
-import com.nbnw.sft.common.LangManager;
-import com.nbnw.sft.config.ModConfig;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;

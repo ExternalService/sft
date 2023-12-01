@@ -1,6 +1,5 @@
 package com.nbnw.sft.network.server;
 
-import com.nbnw.sft.common.LangManager;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.common.config.Configuration;
