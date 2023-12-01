@@ -9,7 +9,12 @@ import java.io.File;
 import com.nbnw.sft.ModEntry;
 
 public class ModConfig {
-    private static String singlePlayerSleepName = "several_player_sleep";
+    private static final String  SEVERAL_PLAYER_SLEEP = "several_player_sleep";
+    private static final String CONFIG_VERSION = "config_version";
+
+    private static final String SPS_THRESHOLD = "sps_threshold";
+    private static final String LOGIN_MESSAGE = "login_message";
+
     private Configuration config;
     // 保存单例实例
     private static ModConfig instance;
@@ -21,9 +26,6 @@ public class ModConfig {
             instance = new ModConfig();
         }
         return instance;
-    }
-    public String getSinglePlayerSleepName(){
-        return this.singlePlayerSleepName;
     }
     public Configuration getConfig() {
         return this.config;
@@ -42,14 +44,14 @@ public class ModConfig {
                 "language", "english", "Language setting").getString();
         // 用于配置文件版本控制  TODO：如果检测到配置文件版本不一致 重新生成配置文件 或者删除以前的配置文件中无效的项并新增以前的配置文件没有的项.为了实现这个功能，需要一个类来记录当前版本的配置项列表
         String configVersion = this.config.get(Configuration.CATEGORY_GENERAL,
-                "config_version", ModEntry.metadata.version, "Mod config file version").getString();
+                CONFIG_VERSION, ModEntry.metadata.version, "Mod config file version").getString();
         boolean enableSeveralPlayerSleep = this.config.get(Configuration.CATEGORY_GENERAL,
-                "several_player_sleep", true, "Enable whether several players sleep warp night or not").getBoolean(true);
+                SEVERAL_PLAYER_SLEEP, true, "Enable whether several players sleep warp night or not").getBoolean(true);
         // several player sleep feature threshold. default 0.5
         double spsThreshold = (long) this.config.get(Configuration.CATEGORY_GENERAL,
-                "sps_threshold", 0.5, "Several players sleep warp night sleeping player percentage(0.0-1.0), default 0.5").getDouble(0.5);
+                SPS_THRESHOLD, 0.5, "Several players sleep warp night sleeping player percentage(0.0-1.0), default 0.5").getDouble(0.5);
         boolean enablePlayerLoginMessage = this.config.get(Configuration.CATEGORY_GENERAL,
-                "login_message", true, "Enable whether show mod message to players when they login or not(Use server side config)").getBoolean(true);
+                LOGIN_MESSAGE, true, "Enable whether show mod message to players when they login or not(Use server side config)").getBoolean(true);
         // if the configs has changed by players, save the changes
         if (this.config.hasChanged()) {
             this.config.save();
@@ -67,16 +69,17 @@ public class ModConfig {
     public String getLanguage() {
         return this.config.get(Configuration.CATEGORY_GENERAL, "language", "english").getString();
     }
+    public String getConfigVersion(){
+        return this.config.get(Configuration.CATEGORY_GENERAL, CONFIG_VERSION, "").getString();
+    }
     public boolean isSinglePlayerSleepEnabled() {
-        return this.config.get(Configuration.CATEGORY_GENERAL, "several_player_sleep", true).getBoolean();
+        return this.config.get(Configuration.CATEGORY_GENERAL, SEVERAL_PLAYER_SLEEP, true).getBoolean();
     }
-
     public double getSpsThreshold() {
-        return this.config.get(Configuration.CATEGORY_GENERAL, "sps_threshold", 0.5).getDouble(0.5);
+        return this.config.get(Configuration.CATEGORY_GENERAL, SPS_THRESHOLD, 0.5).getDouble(0.5);
     }
-
     public boolean isPlayerLoginMessageEnabled() {
-        return this.config.get(Configuration.CATEGORY_GENERAL, "login_message", true).getBoolean();
+        return this.config.get(Configuration.CATEGORY_GENERAL, LOGIN_MESSAGE, true).getBoolean();
     }
     @SubscribeEvent
     public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
