@@ -1,6 +1,5 @@
 package com.nbnw.sft.config;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.config.Configuration;
