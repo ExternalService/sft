@@ -1,5 +1,7 @@
 package com.nbnw.sft.handler;
 
+import com.nbnw.sft.common.LangManager;
+import com.nbnw.sft.config.ModConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -19,7 +21,10 @@ public class ScreenMessageHandler {
     private long displayTime = 0;
     private long startTime = 0;
     private int rgbColor = 0xFFFFFF;
-    private ScreenMessageHandler() {}
+    private ScreenMessageHandler() {
+        // TODO 临时解决不切换功能开启和关闭就不会在玩家睡觉时显示功能是否开启的bug 这种方式不能保证客户端和服务端真实的信息一致
+        this.sleepMessage = LangManager.getFinalMessage(ModConfig.getInstance().isPlayerLoginMessageEnabled());
+    }
     public static ScreenMessageHandler getInstance() {
         if (instance == null) {
             instance = new ScreenMessageHandler();
@@ -39,10 +44,6 @@ public class ScreenMessageHandler {
     public void showMessage(String serverMessage, String sleepMessage, int displaySeconds, int color) {
         showMessage(serverMessage, sleepMessage, displaySeconds);
         this.rgbColor = color;
-    }
-
-    public void resetSleepMessage(){
-        this.sleepMessage = "";
     }
 
     @SubscribeEvent

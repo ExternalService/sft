@@ -1,5 +1,6 @@
 package com.nbnw.sft.config;
 
+import com.nbnw.sft.network.ConfigSyncPacket;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.config.Configuration;
@@ -39,6 +40,27 @@ public class ModConfig {
         this.config = new Configuration(configFile);
         loadConfiguration();
     }
+
+    // 加载和同步配置
+    public void loadAndSyncConfig() {
+        // 加载配置
+        loadConfiguration();
+
+        // 同步到所有客户端
+        syncConfigToClients();
+    }
+
+    // TODO 将配置数据同步到所有客户端
+    private void syncConfigToClients() {
+        // 封装配置数据并发送到所有客户端
+        // 使用Forge网络包系统进行通信
+    }
+
+    // TODO 客户端接收配置数据后，调用此方法同步配置
+    public void onConfigSyncPacketReceived(ConfigSyncPacket packet) {
+        // 更新客户端的配置实例
+    }
+
     private void loadConfiguration() {
         // read config file.if not exist,then create it with the default settings
         String language = this.config.get(Configuration.CATEGORY_GENERAL,
