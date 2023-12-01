@@ -15,7 +15,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
  */
 public class ScreenMessageHandler {
     private static ScreenMessageHandler instance = null;
-    private String serverMessage = "";
+    private String serverMessage;
 
     private String sleepMessage = "";
     private long displayTime = 0;
@@ -23,7 +23,7 @@ public class ScreenMessageHandler {
     private int rgbColor = 0xFFFFFF;
     private ScreenMessageHandler() {
         // TODO 临时解决不切换功能开启和关闭就不会在玩家睡觉时显示功能是否开启的bug 这种方式不能保证客户端和服务端真实的信息一致
-        this.sleepMessage = LangManager.getFinalMessage(ModConfig.getInstance().isPlayerLoginMessageEnabled());
+        this.serverMessage = LangManager.getFinalMessage(ModConfig.getInstance().isPlayerLoginMessageEnabled());
     }
     public static ScreenMessageHandler getInstance() {
         if (instance == null) {
@@ -38,7 +38,7 @@ public class ScreenMessageHandler {
         if(!sleepMessage.equals("")){
             this.sleepMessage = sleepMessage;
         }
-        this.displayTime = displaySeconds * 1000; // 转换为毫秒时间
+        this.displayTime = (long) displaySeconds * 1000; // 转换为毫秒时间
         this.startTime = System.currentTimeMillis();
     }
     public void showMessage(String serverMessage, String sleepMessage, int displaySeconds, int color) {
