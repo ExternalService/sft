@@ -81,6 +81,14 @@ public class ModConfig {
     public boolean isPlayerLoginMessageEnabled() {
         return this.config.get(Configuration.CATEGORY_GENERAL, LOGIN_MESSAGE, true).getBoolean();
     }
+
+    // 检查配置文件存储的版本号信息是否和模组一致
+    public boolean versionCheck() {
+        if(getConfigVersion().equals(ModEntry.VERSION)){
+            return true;
+        }
+        return false;
+    }
     @SubscribeEvent
     public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.modID.equals(ModEntry.MODID)) {
