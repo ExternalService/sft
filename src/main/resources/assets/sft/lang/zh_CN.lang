@@ -1,10 +1,10 @@
-key.toggleSleepKey=少数人睡觉跳过黑夜开关
-key.categories.sft=为了明天而睡觉
+sft.key.toggleSleepKey=少数人睡觉跳过黑夜开关
+sft.key.categories=为了明天而睡觉
 
-toggle.common.message=睡觉功能:
-toggle.enabled.message=开启
-toggle.disabled.message=关闭
+sft.toggle.common.message=睡觉功能:
+sft.toggle.enabled.message=开启
+sft.toggle.disabled.message=关闭
 
-sleep.count.message=当前世界睡眠统计:
-current.sleep.percentage=. 实际睡眠百分比:
-server.threshold.percentage= 功能触发阈值:
+sft.sleep.count.message=当前世界睡眠统计:
+sft.current.sleep.percentage=. 实际睡眠百分比:
+sft.server.threshold.percentage= 功能触发阈值:

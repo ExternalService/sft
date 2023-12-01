@@ -1,5 +1,6 @@
 package com.nbnw.sft.config;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.config.Configuration;
@@ -43,7 +44,7 @@ public class ModConfig {
         // read config file.if not exist,then create it with the default settings
         String language = this.config.get(Configuration.CATEGORY_GENERAL,
                 LANGUAGE, "english", "Language setting").getString();
-        // 用于配置文件版本控制  TODO：如果检测到配置文件版本不一致 重新生成配置文件 或者删除以前的配置文件中无效的项并新增以前的配置文件没有的项.为了实现这个功能，需要一个类来记录当前版本的配置项列表
+        // 用于配置文件版本控制
         String configVersion = this.config.get(Configuration.CATEGORY_GENERAL,
                 CONFIG_VERSION, ModEntry.metadata.version, "Mod config file version").getString();
         boolean enableSeveralPlayerSleep = this.config.get(Configuration.CATEGORY_GENERAL,
@@ -103,6 +104,7 @@ public class ModConfig {
         // 如果配置文件的版本与模组版本不一致，则重置配置
         if (!versionCheck()) {
             resetConfiguration();
+            // TODO：目前检测到版本号不一致会直接重新生成配置文件 但是对玩家不友好，玩家需要重新改配置，可以考虑删除以前的配置文件中无效的项并新增以前的配置文件没有的项.为了实现这个功能，需要一个类来记录当前版本的配置项列表
         } else {
             // 如果版本匹配，则正常加载配置
             loadConfiguration();

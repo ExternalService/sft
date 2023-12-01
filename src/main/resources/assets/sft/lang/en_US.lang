@@ -1,10 +1,10 @@
-key.toggleSleepKey=several players sleep warp night feature toggle
-key.categories.sft=Sleeping For Tomorrow
+sft.key.toggleSleepKey=several players sleep warp night feature toggle
+sft.key.categories=Sleeping For Tomorrow
 
-toggle.common.message=Sleep feature:
-toggle.enabled.message=enabled
-toggle.disabled.message=disabled
+sft.toggle.common.message=Sleep feature:
+sft.toggle.enabled.message=enabled
+sft.toggle.disabled.message=disabled
 
-sleep.count.message=Current world sleep count:
-current.sleep.percentage=. Actual sleep percentage:
-server.threshold.percentage= Feature trigger threshold:
+sft.sleep.count.message=Current world sleep count:
+sft.current.sleep.percentage=. Actual sleep percentage:
+sft.server.threshold.percentage= Feature trigger threshold:
