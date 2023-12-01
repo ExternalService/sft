@@ -19,12 +19,10 @@ import com.nbnw.sft.config.ModConfig;
  * 已添加多世界处理
  */
 public class PlayerSleepEventHandler {
-
-    // private static final double SLEEP_PERCENTAGE_THRESHOLD = 0.5; // 50% 触发阈值 睡眠玩家百分比超过此值时才执行功能
     private Map<World, Map<EntityPlayer, Long>> sleepingPlayers = new HashMap<>(); // 存储每个世界的每一个正在睡觉的玩家和该玩家的睡觉时间点
 
     /**
-     * 获取sleepingPlayers中的一个world中的最大睡眠时间
+     * 获取sleepingPlayers中的特定world中的最大睡眠时间
      * 实际上现有的逻辑每个玩家的最大睡眠时间都是一致的，都会是达到百分比阈值时间点时的世界时间
      */
     private Long getMaxSleepTime(World world) {
@@ -157,14 +155,13 @@ public class PlayerSleepEventHandler {
                         iterator.remove();
                         continue;
                     }
-
                     // 检查玩家已经睡了多久，使用当前世界时间减去开始睡觉的时间
                     long timeSlept = 0;
                     // 如果这个功能被关闭了，则设置睡觉时长为-1，从而阻止功能实现
                     // 不能直接通过清理睡觉玩家列表阻止整个事件逻辑，否则在关闭后又开启的情况下，仍然有玩家睡觉却无法继续正常计时，因为睡觉的玩家已经被移除了列表
                     if(!ModConfig.getInstance().isSinglePlayerSleepEnabled()){
                         resetMaxSleepTime(world);
-                        // timeSlept = -1; // 简单的做法 在完成下面重新记录时间的功能后，注释掉timeSlept = -1;
+                        // timeSlept = -1; // 简单的做法 在完成重新记录时间的功能后，注释掉timeSlept = -1;
                     }else{
                         if(sleepStartTime == null){
                             // 功能被重新启用，为尚未记录开始睡眠时间的玩家设置当前时间
@@ -189,8 +186,9 @@ public class PlayerSleepEventHandler {
                         for (EntityPlayer sleepingPlayer : worldSleepingPlayers.keySet()) {
                             sleepingPlayer.wakeUpPlayer(false, true, true);
                         }
-                        sleepingPlayers.remove(world);// 清除该世界中记录的睡眠玩家
-                        break; // 满足条件，不再检测
+                        // 在完成功能后清除记录的该世界的睡觉玩家信息并跳出循环
+                        sleepingPlayers.remove(world);
+                        break;
                     }
                 }
             }
