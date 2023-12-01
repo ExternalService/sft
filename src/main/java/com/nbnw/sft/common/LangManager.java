@@ -11,9 +11,11 @@ public class LangManager {
     public static final String toggleEnabledMessage = "toggle.enabled.message";
     // 功能关闭时的后续信息
     public static final String toggleDisabledMessage = "toggle.disabled.message";
-
+    // 玩家睡觉时屏幕显示的公共信息
     public static final String sleepCountMessage = "sleep.count.message";
+    // 玩家睡觉时屏幕显示的正在睡觉的玩家的百分比提示前缀
     public static final String currentSleepPercentage = "current.sleep.percentage";
+    // 玩家睡觉时屏幕显示的服务器配置中要求的百分比提示前缀
     public static final String serverThresholdPercentage = "server.threshold.percentage";
 
     public static String getFinalMessage(boolean newSetting) {
