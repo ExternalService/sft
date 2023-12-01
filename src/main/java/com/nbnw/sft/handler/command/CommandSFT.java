@@ -46,8 +46,6 @@ public class CommandSFT extends CommandBase {
                 throw new WrongUsageException(getCommandUsage(sender));
         }
     }
-
-
     @Override
     public List addTabCompletionOptions(ICommandSender sender, String[] args) {
         if (args.length == 1) {
