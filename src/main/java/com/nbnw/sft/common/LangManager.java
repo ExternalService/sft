@@ -18,7 +18,7 @@ public class LangManager {
 
     public static String getFinalMessage(boolean newSetting) {
         //I18n.format方法将根据玩家客户端的当前语言设置自动选择正确的本地化字符串
-        return I18n.format(LangManager.toggleCommonMessage) + (newSetting ? I18n.format(LangManager.toggleEnabledMessage) : I18n.format(LangManager.toggleDisabledMessage));;
+        return I18n.format(LangManager.toggleCommonMessage) + (newSetting ? I18n.format(LangManager.toggleEnabledMessage) : I18n.format(LangManager.toggleDisabledMessage));
     }
 
 }
