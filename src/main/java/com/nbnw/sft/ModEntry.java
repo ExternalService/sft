@@ -22,7 +22,7 @@ import net.minecraftforge.common.MinecraftForge;
 public class ModEntry
 {
     public static final String MODID = "sft";
-    public static final String VERSION = "@VERSION@";
+    public static final String VERSION = "1.3.0";
     @Mod.Metadata
     public static ModMetadata metadata;
     // 指定客户端和服务器代理类的路径
