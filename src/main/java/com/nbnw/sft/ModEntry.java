@@ -18,7 +18,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = ModEntry.MODID, version = ModEntry.VERSION)
+@Mod(modid = ModEntry.MODID)
 public class ModEntry
 {
     public static final String MODID = "sft";

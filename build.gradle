@@ -33,9 +33,9 @@ dependencies {
 
 processResources
 {
-    filesMatching('**/*.java') {
-        filter ReplaceTokens, tokens: [VERSION: project.version]
-    }
+//    filesMatching('**/*.java') {
+//        filter ReplaceTokens, tokens: [VERSION: project.version]
+//    }
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
 
