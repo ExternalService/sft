@@ -5,8 +5,6 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
 import org.lwjgl.input.Keyboard;
@@ -16,7 +14,6 @@ import com.nbnw.sft.network.CommonMessagePacket;
 import com.nbnw.sft.network.PacketManager;
 import com.nbnw.sft.network.CommonMessagePacket.MessageType;
 
-@SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 
     private KeyBinding toggleSleepKeyBinding;
