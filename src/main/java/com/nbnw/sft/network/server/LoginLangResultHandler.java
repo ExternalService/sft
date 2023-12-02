@@ -13,6 +13,9 @@ public class LoginLangResultHandler {
     public void sendChatMessageToServer(CommonMessagePacket message, MessageContext ctx){
         if (ctx.side.isServer()) {
             System.out.println("服务端收到来自客户端的信息");
+            if (!message.getType().equals(CommonMessagePacket.MessageType.CLIENT_LANGUAGE_CODE)) {
+                return;
+            }
             // 将每行消息存储在列表中
             List<String> messages_en = Arrays.asList(
                     "Message from sleep for tomorrow mod:",

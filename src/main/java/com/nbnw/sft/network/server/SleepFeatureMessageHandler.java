@@ -13,6 +13,9 @@ import com.nbnw.sft.network.CommonMessagePacket.MessageType;
 public class SleepFeatureMessageHandler {
     public void sendScreenMessageToClient(CommonMessagePacket message, MessageContext ctx) {
         if (ctx.side.isServer()) {
+            if (!message.getType().equals(MessageType.CLIENT_KEY_PRESSED_CODE)) {
+                return;
+            }
             int key = message.getClientKeyPressedCode();
             // 在服务器的主线线程中执行配置更改和消息发送
             // 当服务端收到按键数据包后，发送一个屏幕消息数据包给所有玩家

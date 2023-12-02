@@ -19,7 +19,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.10-beta-1.1.3"
+version = "1.7.10-beta-1.3.0"
 group= "com.nbnw.sft"
 archivesBaseName = "SleepForTomorrow"
 

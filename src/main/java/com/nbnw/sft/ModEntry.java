@@ -1,10 +1,7 @@
 package com.nbnw.sft;
 
 import com.nbnw.sft.config.ModConfig;
-import com.nbnw.sft.handler.PlayerBedStateHandler;
-import com.nbnw.sft.handler.PlayerLoginEventHandler;
-import com.nbnw.sft.handler.PlayerSleepEventHandler;
-import com.nbnw.sft.handler.ScreenMessageHandler;
+import com.nbnw.sft.handler.*;
 import com.nbnw.sft.handler.command.CommandSFT;
 import com.nbnw.sft.network.*;
 import com.nbnw.sft.proxy.ClientProxy;
@@ -67,6 +64,7 @@ public class ModEntry
     {
         ModConfig.getInstance().checkAndResetConfigIfNeeded(); // 检查配置文件版本号并根据需要重置配置文件
         MinecraftForge.EVENT_BUS.register(ScreenMessageHandler.getInstance()); // 注册屏幕显示信息事件实例
+        MinecraftForge.EVENT_BUS.register(ShowSleepPlayerCount.getInstance()); // 注册睡眠统计显示信息事件实例
         FMLCommonHandler.instance().bus().register(new PlayerLoginEventHandler()); // 玩家登陆事件
         MinecraftForge.EVENT_BUS.register(new PlayerLoginEventHandler()); // 玩家登陆事件
         MinecraftForge.EVENT_BUS.register(new PlayerSleepEventHandler()); // 玩家睡觉事件

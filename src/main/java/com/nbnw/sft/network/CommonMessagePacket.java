@@ -24,6 +24,10 @@ public class CommonMessagePacket implements IMessage {
     private int duration; // 消息时长
     private boolean sleepToggle; // 睡眠特性是否开启
 
+    private int clientThresholdRequestCode; // 客户端请求返回睡眠百分比代码
+
+    private String serverThresholdPercentageValue; // 服务端返回的睡眠百分比数据
+
     public CommonMessagePacket() {
         this.screenMessage = "default message";
         this.serverLangRequestCode = 1;
@@ -31,12 +35,15 @@ public class CommonMessagePacket implements IMessage {
     }
 
 
-    public CommonMessagePacket(MessageType type, String languageCode) {
+    public CommonMessagePacket(MessageType type, String message) {
         this(); // 调用无参构造
         this.type = type;
         switch (type){
             case CLIENT_LANGUAGE_CODE:
-                this.clientLanguageCode = languageCode;
+                this.clientLanguageCode = message;
+                break;
+            case SERVER_THRESHOLD_PERCENTAGE_VALUE:
+                this.serverThresholdPercentageValue = message;
                 break;
         }
     }
@@ -49,6 +56,9 @@ public class CommonMessagePacket implements IMessage {
                 break;
             case CLIENT_KEY_PRESSED_CODE:
                 this.clientKeyPressedKeyCode = code;
+                break;
+            case CLIENT_THRESHOLD_REQUEST_CODE:
+                this.clientThresholdRequestCode = code;
                 break;
         }
     }
@@ -65,6 +75,10 @@ public class CommonMessagePacket implements IMessage {
 
     @Override
     public void fromBytes(ByteBuf buf) {
+        // 确保ByteBuf中有足够的字节可供读取
+        if (buf.readableBytes() < 4) {
+            throw new RuntimeException("ByteBuf does not contain enough data");
+        }
         this.type = MessageType.values()[buf.readInt()]; // 读取类型
         switch (type) {
             // 字符串类型
@@ -74,12 +88,21 @@ public class CommonMessagePacket implements IMessage {
                 buf.readBytes(bytes);
                 this.clientLanguageCode = new String(bytes, StandardCharsets.UTF_8);// 从数据包中读取语言代码
                 break;
+            case SERVER_THRESHOLD_PERCENTAGE_VALUE:
+                int valueLength = buf.readInt();
+                byte[] valueBytes = new byte[valueLength];
+                buf.readBytes(valueBytes);
+                this.serverThresholdPercentageValue = new String(valueBytes, StandardCharsets.UTF_8);// 从数据包中读取百分比
+                break;
             // 整数类型
             case SERVER_LANG_REQUEST_CODE:
                 this.serverLangRequestCode = buf.readInt();
                 break;
             case CLIENT_KEY_PRESSED_CODE:
                 this.clientKeyPressedKeyCode = buf.readInt();
+                break;
+            case CLIENT_THRESHOLD_REQUEST_CODE:
+                this.clientThresholdRequestCode = buf.readInt();
                 break;
             // 组合类型
             case SERVER_SCREEN_MESSAGE:
@@ -103,12 +126,20 @@ public class CommonMessagePacket implements IMessage {
                 buf.writeInt(bytes.length);
                 buf.writeBytes(bytes);
                 break;
+            case SERVER_THRESHOLD_PERCENTAGE_VALUE:
+                byte[] valueBytes = serverThresholdPercentageValue.getBytes(StandardCharsets.UTF_8); // 将语言代码写入数据包
+                buf.writeInt(valueBytes.length);
+                buf.writeBytes(valueBytes);
+                break;
             // 整数类型
             case SERVER_LANG_REQUEST_CODE:
                 buf.writeInt(serverLangRequestCode);
                 break;
             case CLIENT_KEY_PRESSED_CODE:
                 buf.writeInt(clientKeyPressedKeyCode);
+                break;
+            case CLIENT_THRESHOLD_REQUEST_CODE:
+                buf.writeInt(clientThresholdRequestCode);
                 break;
             // 组合类型
             case SERVER_SCREEN_MESSAGE:
@@ -147,13 +178,22 @@ public class CommonMessagePacket implements IMessage {
         return sleepToggle;
     }
 
+    public int getClientThresholdRequestCode(){
+        return clientThresholdRequestCode;
+    }
+
+    public String getServerThresholdPercentageValue() {
+        return serverThresholdPercentageValue;
+    }
+
     public enum MessageType {
         CLIENT_LANGUAGE_CODE, // 客户端发送自身本地化语言代码信息
         SERVER_LANG_REQUEST_CODE, // 服务端发送请求语言信息
-
         CLIENT_KEY_PRESSED_CODE, // 客户端发送按键被按下信息
         SERVER_SCREEN_MESSAGE, // 服务端发送客户端需要显示的信息
 
+        CLIENT_THRESHOLD_REQUEST_CODE, // 客户端请求返回百分比阈值信息
+        SERVER_THRESHOLD_PERCENTAGE_VALUE // 服务端配置文件睡眠百分比
     }
 
 }

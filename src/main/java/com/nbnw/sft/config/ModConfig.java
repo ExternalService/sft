@@ -17,6 +17,8 @@ public class ModConfig {
     private static final String SPS_THRESHOLD = "sps_threshold";
     private static final String LOGIN_MESSAGE = "login_message";
 
+    private static final int MESSAGE_COLOR = 0xE367E9;
+
     private Configuration config;
     // 保存单例实例
     private static ModConfig instance;
@@ -103,6 +105,10 @@ public class ModConfig {
     }
     public boolean isPlayerLoginMessageEnabled() {
         return this.config.get(Configuration.CATEGORY_GENERAL, LOGIN_MESSAGE, true).getBoolean();
+    }
+
+    public int getMessageColor(){
+        return MESSAGE_COLOR;
     }
 
     /**
