@@ -116,7 +116,7 @@ public class ModConfig {
      * @return true: 一致, false: 不一致
      */
     public boolean versionCheck() {
-        if(getConfigVersion().equals(ModEntry.metadata.version)){ // 版本号一致
+        if(getConfigVersion().equals(ModEntry.VERSION)){ // 版本号一致
             return true;
         }
         return false; // 不一致
@@ -127,7 +127,7 @@ public class ModConfig {
     public void checkAndResetConfigIfNeeded() {
         this.config.load(); // 首先加载配置文件
         // 检查配置文件的版本
-        String configVersion = this.config.get(Configuration.CATEGORY_GENERAL, CONFIG_VERSION, ModEntry.metadata.version).getString();
+        String configVersion = this.config.get(Configuration.CATEGORY_GENERAL, CONFIG_VERSION, ModEntry.VERSION).getString();
         // 如果配置文件的版本与模组版本不一致，则重置配置
         if (!versionCheck()) {
             resetConfiguration();
@@ -147,7 +147,7 @@ public class ModConfig {
         this.config.get(Configuration.CATEGORY_GENERAL, SPS_THRESHOLD, 0.5).set(0.5);
         this.config.get(Configuration.CATEGORY_GENERAL, LOGIN_MESSAGE, true).set(true);
         this.config.get(Configuration.CATEGORY_GENERAL, LANGUAGE, "english").set("english");
-        this.config.get(Configuration.CATEGORY_GENERAL, CONFIG_VERSION, ModEntry.metadata.version).set(ModEntry.metadata.version);
+        this.config.get(Configuration.CATEGORY_GENERAL, CONFIG_VERSION, ModEntry.VERSION).set(ModEntry.VERSION);
 
         // Save the reset configuration
         if (this.config.hasChanged()) {

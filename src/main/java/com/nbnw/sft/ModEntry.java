@@ -4,13 +4,12 @@ import com.nbnw.sft.config.ModConfig;
 import com.nbnw.sft.handler.*;
 import com.nbnw.sft.handler.command.CommandSFT;
 import com.nbnw.sft.network.*;
-import com.nbnw.sft.proxy.ClientProxy;
-import com.nbnw.sft.proxy.CommonProxy;
+//import com.nbnw.sft.proxy.ClientProxy;
+//import com.nbnw.sft.proxy.CommonProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.ModMetadata;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -27,8 +26,8 @@ public class ModEntry
     @Mod.Metadata
     public static ModMetadata metadata;
     // 指定客户端和服务器代理类的路径
-    @SidedProxy(clientSide = "com.nbnw.sft.proxy.ClientProxy", serverSide = "com.nbnw.sft.proxy.ServerProxy")
-    public static CommonProxy proxy;
+//    @SidedProxy(clientSide = "com.nbnw.sft.proxy.ClientProxy", serverSide = "com.nbnw.sft.proxy.ServerProxy")
+//    public static CommonProxy proxy;
 
     public static SimpleNetworkWrapper network;
 
@@ -43,12 +42,12 @@ public class ModEntry
         ModConfig.getInstance().init(event);
         MinecraftForge.EVENT_BUS.register(ModConfig.getInstance());
         // 创建代理实例
-        if (event.getSide().isClient()) {
-            proxy = new ClientProxy();
-        } else {
-            proxy = new CommonProxy();
-        }
-        proxy.init();
+//        if (event.getSide().isClient()) {
+//            proxy = new ClientProxy();
+//        } else {
+//            proxy = new CommonProxy();
+//        }
+//        proxy.init();
 
         // 初始化网络通道
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
