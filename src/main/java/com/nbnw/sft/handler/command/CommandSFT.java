@@ -43,7 +43,7 @@ public class CommandSFT extends CommandBase {
                 handleHelp(sender, args);
                 break;
             default:
-                throw new WrongUsageException(getCommandUsage(sender));
+                throw new WrongUsageException("Invalid command");
         }
     }
     @Override
