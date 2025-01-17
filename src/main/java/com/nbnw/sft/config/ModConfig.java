@@ -113,22 +113,21 @@ public class ModConfig {
 
     /**
      * 检查配置文件存储的版本号信息是否和模组一致
-     * @return true: 一致, false: 不一致
      */
     public boolean versionCheck() {
-        if(getConfigVersion().equals(ModEntry.VERSION)){ // 版本号一致
+        if(getConfigVersion().equals(ModEntry.VERSION)){
             return true;
         }
-        return false; // 不一致
+        return false;
     }
     /**
      * 如果不一致则重置配置文件
      */
     public void checkAndResetConfigIfNeeded() {
-        this.config.load(); // 首先加载配置文件
+        this.config.load(); // 加载配置文件
         // 检查配置文件的版本
         String configVersion = this.config.get(Configuration.CATEGORY_GENERAL, CONFIG_VERSION, ModEntry.VERSION).getString();
-        // 如果配置文件的版本与模组版本不一致，则重置配置
+        // 如果版本不一致，则重置配置
         if (!versionCheck()) {
             resetConfiguration();
             // TODO：目前检测到版本号不一致会直接重新生成配置文件 但是对玩家不友好，玩家需要重新改配置，可以考虑删除以前的配置文件中无效的项并新增以前的配置文件没有的项.为了实现这个功能，需要一个类来记录当前版本的配置项列表

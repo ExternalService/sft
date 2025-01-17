@@ -28,7 +28,7 @@ public class LoginLangResultHandler {
             List<String> messages_zh = Arrays.asList(
                     "来自sleep for tomorrow模组的信息:",
                     "1:你可以在这些配置文件夹中找到模组的配置文件.",
-                    "  minecraft\\config\\sft(客户端) or config\\sft(服务端)",
+                    "  minecraft\\config\\sft(客户端) 或者 config\\sft(服务端)",
                     "2:默认按P开启/关闭本模组的功能.",
                     "  启动不用所有玩家睡觉就可以跳过夜晚功能.",
                     "3:你也可以在配置文件中关闭本模组的登录信息显示"
