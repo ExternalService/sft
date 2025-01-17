@@ -21,7 +21,7 @@ public class SleepFeatureMessageHandler {
             // 当服务端收到按键数据包后，发送一个屏幕消息数据包给所有玩家
             // 切换配置并保存
             if(key == PacketManager.getInstance().getSingleSleepKeyCode()) {
-                boolean newSetting = !ModConfig.getInstance().isSinglePlayerSleepEnabled();
+                boolean newSetting = !ModConfig.getInstance().isSeveralPlayerSleepEnabled();
                 ModConfig.getInstance().getConfig().get(Configuration.CATEGORY_GENERAL, "several_player_sleep", true).set(newSetting);
                 ModConfig.getInstance().reloadConfig();
                 IMessage screenMessagePacket = new CommonMessagePacket(MessageType.SERVER_SCREEN_MESSAGE, "", 5, newSetting);

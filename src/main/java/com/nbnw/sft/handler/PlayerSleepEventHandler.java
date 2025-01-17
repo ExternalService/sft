@@ -60,7 +60,7 @@ public class PlayerSleepEventHandler {
         EntityPlayer player = event.entityPlayer;
         World world = player.worldObj;
         // 功能被关闭时 将每个世界的最长睡觉时间重置为null并返回
-        if(!ModConfig.getInstance().isSinglePlayerSleepEnabled()){
+        if(!ModConfig.getInstance().isSeveralPlayerSleepEnabled()){
             resetMaxSleepTime(world);
             return;
         }
@@ -159,7 +159,7 @@ public class PlayerSleepEventHandler {
                     long timeSlept = 0;
                     // 如果这个功能被关闭了，则设置睡觉时长为-1，从而阻止功能实现
                     // 不能直接通过清理睡觉玩家列表阻止整个事件逻辑，否则在关闭后又开启的情况下，仍然有玩家睡觉却无法继续正常计时，因为睡觉的玩家已经被移除了列表
-                    if(!ModConfig.getInstance().isSinglePlayerSleepEnabled()){
+                    if(!ModConfig.getInstance().isSeveralPlayerSleepEnabled()){
                         resetMaxSleepTime(world);
                         // timeSlept = -1; // 简单的做法 在完成重新记录时间的功能后，注释掉timeSlept = -1;
                     }else{

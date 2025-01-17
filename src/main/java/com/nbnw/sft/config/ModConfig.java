@@ -22,7 +22,6 @@ public class ModConfig {
     private Configuration config;
     // 保存单例实例
     private static ModConfig instance;
-    // 私有构造器
     private ModConfig() {
     }
     public static ModConfig getInstance() {
@@ -38,7 +37,7 @@ public class ModConfig {
         File modConfigDir = new File(event.getModConfigurationDirectory(), ModEntry.metadata.modId);
         modConfigDir.mkdirs();
         File configFile = new File(modConfigDir, "sft_config.cfg");
-        // create mod config file
+        // 创建配置文件
         this.config = new Configuration(configFile);
         loadAndSyncConfig();
     }
@@ -97,7 +96,7 @@ public class ModConfig {
     public String getConfigVersion(){
         return this.config.get(Configuration.CATEGORY_GENERAL, CONFIG_VERSION, "").getString();
     }
-    public boolean isSinglePlayerSleepEnabled() {
+    public boolean isSeveralPlayerSleepEnabled() {
         return this.config.get(Configuration.CATEGORY_GENERAL, SEVERAL_PLAYER_SLEEP, true).getBoolean();
     }
     public double getSpsThreshold() {
