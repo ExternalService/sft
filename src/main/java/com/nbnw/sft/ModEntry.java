@@ -36,14 +36,6 @@ public class ModEntry
     {
         ModConfig.getInstance().init(event);
         MinecraftForge.EVENT_BUS.register(ModConfig.getInstance());
-        // 创建代理实例
-//        if (event.getSide().isClient()) {
-//            proxy = new ClientProxy();
-//        } else {
-//            proxy = new CommonProxy();
-//        }
-//        proxy.init();
-
         // 初始化网络通道
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 
