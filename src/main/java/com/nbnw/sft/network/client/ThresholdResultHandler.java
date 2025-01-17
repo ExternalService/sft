@@ -23,7 +23,14 @@ public class ThresholdResultHandler {
             if (!message.getType().equals(MessageType.SERVER_THRESHOLD_PERCENTAGE_VALUE)) {
                 return;
             }
+            if (Minecraft.getMinecraft().theWorld != null) {
+                if(Minecraft.getMinecraft().theWorld.isDaytime()){ //如果是白天则直接返回，不调用信息显示，避免多世界游戏中，其它世界是黑夜但此世界是白天时，白天也会一直显示信息
+                    return;
+                }
+            }
             String thresholdResultMessage = message.getServerThresholdPercentageValue() + "%";
+
+
             ScreenMessageHandler.getInstance().showMessage(
                     "",
                     I18n.format(LangManager.serverThresholdPercentage) + thresholdResultMessage,
