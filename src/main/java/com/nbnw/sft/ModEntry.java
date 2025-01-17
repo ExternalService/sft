@@ -4,8 +4,6 @@ import com.nbnw.sft.config.ModConfig;
 import com.nbnw.sft.handler.*;
 import com.nbnw.sft.handler.command.CommandSFT;
 import com.nbnw.sft.network.*;
-//import com.nbnw.sft.proxy.ClientProxy;
-//import com.nbnw.sft.proxy.CommonProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -25,9 +23,6 @@ public class ModEntry
     public static final String VERSION = "1.4.0";
     @Mod.Metadata
     public static ModMetadata metadata;
-    // 指定客户端和服务器代理类的路径
-//    @SidedProxy(clientSide = "com.nbnw.sft.proxy.ClientProxy", serverSide = "com.nbnw.sft.proxy.ServerProxy")
-//    public static CommonProxy proxy;
 
     public static SimpleNetworkWrapper network;
 
