@@ -3,13 +3,18 @@ package com.nbnw.sft.common;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
+/**
+ * 统计指定世界中的玩家总数和正在睡觉的玩家人数
+ */
 public class PlayerCountUtil {
     private World world;
     public PlayerCountUtil(World world){
         this.world = world;
     }
 
-    // 当前世界睡觉玩家人数
+    /**
+     * 返回当前世界睡觉玩家人数
+     */
     public int currentWorldSleepPlayerCount(){
         int sleepPlayerCount = 0;
         for (Object obj : world.playerEntities) { // 改为检查这个实体是否是玩家实例，避免不安全的显示类型转换
@@ -23,15 +28,23 @@ public class PlayerCountUtil {
         return sleepPlayerCount;
     }
 
-    // 当前世界玩家人数
+    /**
+     * 返回当前世界玩家人数
+     */
     public int currentWorldPlayerCount() {
         return world.playerEntities.size();
     }
 
+    /**
+     * 返回当前世界睡觉玩家百分比
+     */
     public double getSleepPercentage(){
         return (double) currentWorldSleepPlayerCount() / (double) currentWorldPlayerCount();
     }
 
+    /**
+     * 计算百分比
+     */
     public double getSleepPercentage(int x, int y){
         return (double) x / (double) y;
     }

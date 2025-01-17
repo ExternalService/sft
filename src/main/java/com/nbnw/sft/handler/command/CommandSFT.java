@@ -24,7 +24,7 @@ public class CommandSFT extends CommandBase {
 
 //    @Override
 //    public int getRequiredPermissionLevel() {
-//        return 2; // 指令权限等级 普通玩家权限为0. OP玩家可以是1到4级，具体取决于他们被赋予的权限。
+//        return 2; // 指令权限等级 普通玩家权限为0. OP玩家可以是1到4级
 //    }
 
     @Override
@@ -77,8 +77,7 @@ public class CommandSFT extends CommandBase {
         }
         sender.addChatMessage(new ChatComponentText("1./sft playersSleepingPercentage <percentage> to set playersSleepingPercentage." +
                 "such as you use the /gamerule playersSleepingPercentage <percentage> command in original Minecraft(1.16+)"));
-        sender.addChatMessage(new ChatComponentText("2./sft login_message set to true or false to disable the sft mod's login message"));
-        // sender.addChatMessage(new ChatComponentText("3.press keyboard p to enable/disable mod feature")); // 移除了按键切换功能
+        sender.addChatMessage(new ChatComponentText("2./sft showMessageOnPlayerLogin set to true or false to disable the sft mod's login message"));
     }
 
 

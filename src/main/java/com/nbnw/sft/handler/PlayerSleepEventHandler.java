@@ -15,6 +15,7 @@ import java.util.Map;
 import com.nbnw.sft.config.ModConfig;
 
 /**
+ * 功能主要实现类
  * 不需要全部玩家睡觉即可跳过黑夜功能
  * 已添加多世界处理
  */

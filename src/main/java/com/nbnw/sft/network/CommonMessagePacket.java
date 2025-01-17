@@ -17,7 +17,7 @@ public class CommonMessagePacket implements IMessage {
 
     private int serverLangRequestCode; // 服务端向客户端请求本地化语言信息代码
 
-    private int clientKeyPressedKeyCode; // 客户端向服务端发送按键代码
+//    private int clientKeyPressedKeyCode; // 客户端向服务端发送按键代码
 
     // 下面三个属性用于服务端想客户端发送要显示的消息
     private String screenMessage; // 消息内容
@@ -54,9 +54,9 @@ public class CommonMessagePacket implements IMessage {
             case SERVER_LANG_REQUEST_CODE:
                 this.serverLangRequestCode = code;
                 break;
-            case CLIENT_KEY_PRESSED_CODE:
-                this.clientKeyPressedKeyCode = code;
-                break;
+//            case CLIENT_KEY_PRESSED_CODE:
+//                this.clientKeyPressedKeyCode = code;
+//                break;
             case CLIENT_THRESHOLD_REQUEST_CODE:
                 this.clientThresholdRequestCode = code;
                 break;
@@ -98,9 +98,9 @@ public class CommonMessagePacket implements IMessage {
             case SERVER_LANG_REQUEST_CODE:
                 this.serverLangRequestCode = buf.readInt();
                 break;
-            case CLIENT_KEY_PRESSED_CODE:
-                this.clientKeyPressedKeyCode = buf.readInt();
-                break;
+//            case CLIENT_KEY_PRESSED_CODE:
+//                this.clientKeyPressedKeyCode = buf.readInt();
+//                break;
             case CLIENT_THRESHOLD_REQUEST_CODE:
                 this.clientThresholdRequestCode = buf.readInt();
                 break;
@@ -135,9 +135,9 @@ public class CommonMessagePacket implements IMessage {
             case SERVER_LANG_REQUEST_CODE:
                 buf.writeInt(serverLangRequestCode);
                 break;
-            case CLIENT_KEY_PRESSED_CODE:
-                buf.writeInt(clientKeyPressedKeyCode);
-                break;
+//            case CLIENT_KEY_PRESSED_CODE:
+//                buf.writeInt(clientKeyPressedKeyCode);
+//                break;
             case CLIENT_THRESHOLD_REQUEST_CODE:
                 buf.writeInt(clientThresholdRequestCode);
                 break;
@@ -163,9 +163,9 @@ public class CommonMessagePacket implements IMessage {
         return serverLangRequestCode;
     }
 
-    public int getClientKeyPressedCode() {
-        return clientKeyPressedKeyCode;
-    }
+//    public int getClientKeyPressedCode() {
+//        return clientKeyPressedKeyCode;
+//    }
     public String getScreenMessage() {
         return screenMessage;
     }
@@ -189,7 +189,7 @@ public class CommonMessagePacket implements IMessage {
     public enum MessageType {
         CLIENT_LANGUAGE_CODE, // 客户端发送自身本地化语言代码信息
         SERVER_LANG_REQUEST_CODE, // 服务端发送请求语言信息
-        CLIENT_KEY_PRESSED_CODE, // 客户端发送按键被按下信息
+//        CLIENT_KEY_PRESSED_CODE, // 客户端发送按键被按下信息
         SERVER_SCREEN_MESSAGE, // 服务端发送客户端需要显示的信息
 
         CLIENT_THRESHOLD_REQUEST_CODE, // 客户端请求返回百分比阈值信息

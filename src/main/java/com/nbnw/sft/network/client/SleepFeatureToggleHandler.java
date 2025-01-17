@@ -9,6 +9,12 @@ import com.nbnw.sft.handler.ScreenMessageHandler;
 import com.nbnw.sft.network.CommonMessagePacket;
 import com.nbnw.sft.network.CommonMessagePacket.MessageType;
 
+
+/**
+ * 切换模组功能的开启和关闭
+ * 由于可以将阈值设为1来关闭功能，所以这个类变得没有意义，也没有实际使用，将来可能会移除
+ */
+@Deprecated
 public class SleepFeatureToggleHandler {
     private static final int  rgbColor = 0xE367E9;
     public void showServerResultMessage(CommonMessagePacket message, MessageContext ctx) {

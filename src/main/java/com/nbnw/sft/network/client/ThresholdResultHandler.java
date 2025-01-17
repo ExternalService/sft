@@ -13,6 +13,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
+/**
+ * 客户端显示从服务端获取到的阈值结果在屏幕上显示信息
+ */
 public class ThresholdResultHandler {
     private static final int  rgbColor = 0xE367E9;
     public void showThresholdResultMessage(CommonMessagePacket message, MessageContext ctx) {
@@ -20,16 +23,10 @@ public class ThresholdResultHandler {
             if (!message.getType().equals(MessageType.SERVER_THRESHOLD_PERCENTAGE_VALUE)) {
                 return;
             }
-            //World world = (World) Minecraft.getMinecraft().theWorld;
-            //PlayerCountUtil playerCountUtil = new PlayerCountUtil(world);
-            //int playersInBedCount = playerCountUtil.currentWorldSleepPlayerCount();
-            //int playersInWorldCount = world.playerEntities.size();
-//            String worldPercentage = String.format("%.2f%%", (double) playersInBedCount / (double) playersInWorldCount * 100);
             String thresholdResultMessage = message.getServerThresholdPercentageValue() + "%";
-            ScreenMessageHandler.getInstance().showMessage("", //I18n.format(LangManager.sleepCountMessage) + " " +
-                            //playersInBedCount + " / " + playersInWorldCount +
-                            //I18n.format(LangManager.currentSleepPercentage) + worldPercentage +
-                            I18n.format(LangManager.serverThresholdPercentage) + thresholdResultMessage,
+            ScreenMessageHandler.getInstance().showMessage(
+                    "",
+                    I18n.format(LangManager.serverThresholdPercentage) + thresholdResultMessage,
                     1,
                     rgbColor);
         }

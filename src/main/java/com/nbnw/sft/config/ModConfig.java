@@ -8,7 +8,9 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import java.io.File;
 
 import com.nbnw.sft.ModEntry;
-
+/**
+ * 模组配置文件
+ */
 public class ModConfig {
     private static final String LANGUAGE = "language";
     private static final String  SEVERAL_PLAYER_SLEEP = "several_player_sleep";
@@ -99,6 +101,9 @@ public class ModConfig {
     public boolean isSeveralPlayerSleepEnabled() {
         return this.config.get(Configuration.CATEGORY_GENERAL, SEVERAL_PLAYER_SLEEP, true).getBoolean();
     }
+    /**
+     * 获取玩家睡觉跳过黑夜需要达到的阈值（0~1之间）
+     */
     public double getSpsThreshold() {
         return this.config.get(Configuration.CATEGORY_GENERAL, SPS_THRESHOLD, 0.5).getDouble(0.5);
     }

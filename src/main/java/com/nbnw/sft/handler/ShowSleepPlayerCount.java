@@ -12,8 +12,6 @@ public class ShowSleepPlayerCount {
     private long startTime = 0;
     private int rgbColor = 0xFFFFFF;
     private ShowSleepPlayerCount() {
-        // TODO 临时解决不切换功能开启和关闭就不会在玩家睡觉时显示功能是否开启的bug 这种方式不能保证客户端和服务端真实的信息一致
-        // this.serverMessage = LangManager.getFinalMessage(ModConfig.getInstance().isPlayerLoginMessageEnabled()); // 不能使用这个方法,因为I18n类是客户端独有的
     }
     public static ShowSleepPlayerCount getInstance() {
         if (instance == null) {

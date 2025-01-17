@@ -6,6 +6,10 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.Language;
 import net.minecraft.client.resources.LanguageManager;
+/**
+ * 将客户端设置的语言信息发送到服务端
+ * 以便服务端能够根据客户端的语言信息返回对应语言的其它信息
+ */
 
 public class LoginLangRequestHandler {
     public void sendLangCodeToServer(CommonMessagePacket message, MessageContext ctx) {

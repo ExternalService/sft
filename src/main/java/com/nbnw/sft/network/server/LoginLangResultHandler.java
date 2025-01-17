@@ -1,5 +1,6 @@
 package com.nbnw.sft.network.server;
 
+import com.nbnw.sft.config.ModConfig;
 import com.nbnw.sft.network.CommonMessagePacket;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -9,6 +10,9 @@ import net.minecraft.util.EnumChatFormatting;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 玩家登陆消息提示
+ */
 public class LoginLangResultHandler {
     public void sendChatMessageToServer(CommonMessagePacket message, MessageContext ctx){
         if (ctx.side.isServer()) {
@@ -19,19 +23,20 @@ public class LoginLangResultHandler {
             // 将每行消息存储在列表中
             List<String> messages_en = Arrays.asList(
                     "Message from sleep for tomorrow mod:",
-                    "1:you can find the config file in config folder.",
+                    "1:You can find the config file in config folder.",
                     "  minecraft\\config\\sft folder(Client) or config\\sft folder(Server)",
-                    "2:Press p(Default) to enable or disable the feature.",
+                    "2:Mod feature.",
                     "  Enable not all players sleep in bed but also can warp the night.",
-                    "3:You can disable this login message by change the config file,too"
+                    "  Enable feature, then the night can be skipped when the number of sleeping players reaches the designated percentage",
+                    "3:You can disable this login message by change the config file"
             );
             List<String> messages_zh = Arrays.asList(
                     "来自sleep for tomorrow模组的信息:",
                     "1:你可以在这些配置文件夹中找到模组的配置文件.",
                     "  minecraft\\config\\sft(客户端) 或者 config\\sft(服务端)",
-                    "2:默认按P开启/关闭本模组的功能.",
-                    "  启动不用所有玩家睡觉就可以跳过夜晚功能.",
-                    "3:你也可以在配置文件中关闭本模组的登录信息显示"
+                    "2:模组功能.",
+                    "  启用后玩家睡觉人数达到指定百分比就可以跳过夜晚.",
+                    "3:你可以在配置文件中关闭本模组的登录信息显示"
             );
 
             // 获取发送者的玩家实体
